@@ -21,6 +21,7 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+build-Waterdrop-Desktop_Qt_5_4_1_MSVC2013_64bit-Debug/
 
 # Roslyn cache directories
 *.ide/
@@ -234,3 +235,4 @@ $RECYCLE.BIN/
 *.lnk
 Waterdrop/Waterdrop/Waterdrop/Waterdrop.vcxproj.GhostDoc.xml
 trimeshinfo101/trimeshinfo.exe
+Waterdrop/Waterdrop/Waterdrop.sln.GhostDoc.xml
