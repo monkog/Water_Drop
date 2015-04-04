@@ -2,6 +2,7 @@
 #define MESH
 
 #include <vcg/complex/complex.h>
+#include <QtGui/QMatrix4x4>
 
 class HillVertex; class HillEdge; class HillFace;
 struct HillUsedTypes : public vcg::UsedTypes<vcg::Use<HillVertex> ::AsVertexType
@@ -20,7 +21,8 @@ class Mesh
 public:
     //Loads the mesh from the STL file
     bool loadStlMesh(std::string path);
-
+	//Gives vertices after 3Dtransformations
+	QVector<QPoint> Mesh::getVerticesVector();
 private:
 };
 

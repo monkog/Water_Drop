@@ -1,12 +1,14 @@
 #include "window.h"
-
+#include "mesh.h"
 #include <QtCore/QCoreApplication>
 
 #include <QtGui/QOpenGLContext>
 #include <QtGui/QOpenGLPaintDevice>
 #include <QtGui/QPainter>
 
-OpenGLWindow::OpenGLWindow(QWindow *parent)
+
+
+OpenGLWindow::OpenGLWindow(QVector<QPoint> vertices, QWindow *parent)
     : QWindow(parent)
     , m_update_pending(false)
     , m_animating(false)
@@ -14,6 +16,7 @@ OpenGLWindow::OpenGLWindow(QWindow *parent)
     , m_device(0)
 {
     setSurfaceType(QWindow::OpenGLSurface);
+	m_vertices = vertices;
 }
 
 OpenGLWindow::~OpenGLWindow()
@@ -23,7 +26,14 @@ OpenGLWindow::~OpenGLWindow()
 
 void OpenGLWindow::render(QPainter *painter)
 {
-    Q_UNUSED(painter);
+  //  Q_UNUSED(painter);
+	painter->setPen(Qt::white);
+	QPolygon polygon;
+	for (int i = 0; i < m_vertices.size(); i++)
+		polygon << m_vertices[i];
+	painter->drawPolygon(polygon);
+	//painter->drawPoints(polygon);
+
 }
 
 void OpenGLWindow::initialize()
@@ -58,6 +68,12 @@ bool OpenGLWindow::event(QEvent *event)
         m_update_pending = false;
         renderNow();
         return true;
+	case QEvent::MouseButtonPress:
+		m_isButtonPressed = true;
+		return true;
+	case QEvent::MouseButtonRelease:
+		m_isButtonPressed = false;
+		return true;
     default:
         return QWindow::event(event);
     }

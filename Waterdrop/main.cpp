@@ -12,21 +12,20 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    QGuiApplication app(argc, argv);
+	QGuiApplication app(argc, argv);
+	string MESH_PATH = "..\\was_was_was.stl";
+	Mesh mesh;
+	mesh.loadStlMesh(MESH_PATH);
 
-    string MESH_PATH = "..\\was_was_was.stl";
-    Mesh mesh;
-    mesh.loadStlMesh(MESH_PATH);
+	QSurfaceFormat format;
+	format.setSamples(16);
 
-    QSurfaceFormat format;
-    format.setSamples(16);
+	OpenGLWindow window(mesh.getVerticesVector());
+	window.setFormat(format);
+	window.resize(640, 480);
+	window.show();
 
-    OpenGLWindow window;
-    window.setFormat(format);
-    window.resize(640, 480);
-    window.show();
+	window.setAnimating(true);
 
-    window.setAnimating(true);
-
-    return app.exec();
+	return app.exec();
 }
