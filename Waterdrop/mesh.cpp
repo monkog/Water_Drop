@@ -27,27 +27,16 @@ bool Mesh::loadStlMesh(string path)
     return true;
 }
 
-QVector<QPoint> Mesh::getVerticesVector()
+QVector<QVector4D> Mesh::getVerticesVector()
 {
-	QVector<QPoint> readyVertices;
-	QVector4D v;
-	HillMesh::VertexIterator vi;
-	QMatrix4x4 matrixProjection = QMatrix4x4();
-	QMatrix4x4 matrixTranslate = QMatrix4x4();
-	QMatrix4x4 matrixScale = QMatrix4x4();
-
-	matrixProjection.setToIdentity();
-	matrixProjection(3, 2) = -1 / 500;
-	matrixScale.scale(10);
-	matrixTranslate.translate(400, 200);
-	
-	for (vi = mesh.vert.begin(); vi != mesh.vert.end(); ++vi)
-	if (!(*vi).IsD())
+	QVector<QVector4D> vertices;
+	HillMesh::FaceIterator vi;
+	for (vi = mesh.face.begin(); vi != mesh.face.end(); ++vi)
 	{
-		v = QVector4D((*vi).P()[0], (*vi).P()[1], (*vi).P()[2], 1.0f);
-		v = matrixTranslate*matrixScale*matrixProjection*v;
-		readyVertices.push_back(QPoint((int)(v.x() / v.w()), (int)(v.y() / v.w())));
+		vertices.push_back(QVector4D((*vi).V(0)->P()[0], (*vi).V(0)->P()[1], (*vi).V(0)->P()[2], 1.0f));
+		vertices.push_back(QVector4D((*vi).V(1)->P()[0], (*vi).V(1)->P()[1], (*vi).V(1)->P()[2], 1.0f));
+		vertices.push_back(QVector4D((*vi).V(2)->P()[0], (*vi).V(2)->P()[1], (*vi).V(2)->P()[2], 1.0f));
 	}
-	return readyVertices;
+	return vertices;
 }
 
