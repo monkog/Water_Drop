@@ -27,7 +27,7 @@ bool Mesh::loadStlMesh(string path)
     return true;
 }
 
-QVector<QVector4D> Mesh::getVerticesVector()
+QVector<QVector4D> Mesh::getPolygonsVertices()
 {
 	QVector<QVector4D> vertices;
 	HillMesh::FaceIterator vi;

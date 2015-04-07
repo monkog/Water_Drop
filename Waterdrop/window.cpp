@@ -34,7 +34,7 @@ void OpenGLWindow::render(QPainter *painter)
 	{
 		polygon.clear();
 		polygon << readyVertices[i] << readyVertices[i + 1] << readyVertices[i + 2];
-		painter->drawPolyline(polygon);
+		painter->drawPolygon(polygon);
 	}
 }
 

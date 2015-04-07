@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	QSurfaceFormat format;
 	format.setSamples(16);
 
-	OpenGLWindow window(mesh.getVerticesVector());
+	OpenGLWindow window(mesh.getPolygonsVertices());
 	window.setFormat(format);
 	window.resize(640, 480);
 	window.show();

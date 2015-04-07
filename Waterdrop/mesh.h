@@ -21,8 +21,8 @@ class Mesh
 public:
     //Loads the mesh from the STL file
     bool loadStlMesh(std::string path);
-	//Gives vertices from model
-	QVector<QVector4D> Mesh::getVerticesVector();
+	//Gives vertices of each model's face
+	QVector<QVector4D> Mesh::getPolygonsVertices();
 private:
 };
 
